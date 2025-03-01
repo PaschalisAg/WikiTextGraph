@@ -1,0 +1,197 @@
+# English
+EN:
+  section_patt: "(==\\s*(See also|Publications|References|Notes|Footnotes|External links|Further reading)\\s*==|WP:SEEALSO)"
+  filter_out_patterns:
+    - "^Wikt:"
+    - "^Wiktionary:"
+    - "^CAT:"
+    - "^Category:"
+    - "^Draft:"
+    - "^File:"
+    - "^List of"
+    - "^MediaWiki:"
+    - "^Module:"
+    - "^Template:"
+    - "^Wikipedia:"
+    - "Index of"
+    - "\\(disambiguation\\)"
+    - "^Portal:"
+    - "^Image:"
+    - "^Help:"
+    - " list of "
+    - "list of"
+  redirect_keywords: ["#redirect"]
+
+# Spanish
+ES:
+  section_patt: "(==\\s*(Véase también|Referencias|Notas|Enlaces externos|Bibliografía|Otra lectura)\\s*==)"
+  filter_out_patterns:
+    - "^Wikt:"
+    - "^Wiktionary:"
+    - "^CAT:"
+    - "^Categoría:"
+    - "^Categoria:"
+    - "^File:"
+    - "^Archivo:"
+    - "^Image:"
+    - "^MediaWiki:"
+    - "^Plantilla:"
+    - "^Wikipedia:"
+    - "^Anexo:"
+    - "\\(desambiguación\\)"
+    - "\\(desambiguacion\\)"
+    - "^Portal:"
+    - "^Help:"
+    - "^Ayuda:"
+    - "^Wikiproyecto:"
+    - "^Usuario:"
+    - "^User:"
+    - "^Módulo:"
+    - "^Modulo:"
+  redirect_keywords: ["#redirreción", "#redirrecion", "#redirect"]
+
+# Greek
+GR:
+  section_patt: "(==\\s*(Δείτε επίσης|Δειτε επισης|Παραπομπές|Παραπομπες|Σημειώσεις|Σημειωσεις|Εξωτερικοί σύνδεσμοι|Εξωτερικοι συνδεσμοι|Προτεινόμενη βιβλιογραφία|Προτεινομενη βιβλιογραφια|Βιβλιογραφία|Βιβλιογραφια|Περαιτέρω ανάγνωση|Περαιτερω αναγνωση)\\s*==)"
+  filter_out_patterns:
+    - "^Wikt:"
+    - "^Wiktionary:"
+    - "^Κατηγορία:"
+    - "^Κατηγορια:"
+    - "^Αρχείο:"
+    - "^Αρχειο:"
+    - "^File:"
+    - "^Image:"
+    - "^MediaWiki:"
+    - "^Module:"
+    - "^Πρότυπο:"
+    - "^Προτυπο:"
+    - "^Wikipedia:"
+    - "^Βικιπαίδεια:"
+    - "^Βικιπαιδεια:"
+    - "\\(αποσαφήνιση\\)"
+    - "\\(αποσαφηνιση\\)"
+    - "^Portal:"
+    - "^Πύλη:"
+    - "^Πυλη:"
+    - "^Βοήθεια:"
+    - "^Βοηθεια:"
+    - "^Topic:"
+    - "^Χρήστης:"
+    - "^Χρηστης:"
+    - "^User:"
+  redirect_keywords: ["#ανακατεύθυνση", "#ανακατευθυνση", "#redirect"]
+
+# Polish
+PL:
+  section_patt: "(==\\s*(Zobasz też|Uwagi|Bibliografia|Przypisy|Linki zewnętrzne|Literatura w języku polskim)\\s*==)"
+  filter_out_patterns:
+    - "^Wikipedia:"
+    - "^Pomoc:"
+    - "^Szablon:"
+    - "^MediaWiki:"
+    - "^Kategoria:"
+    - "^Wikiprojekt:"
+    - "^Portal:"
+    - "^Plik:"
+    - "^Moduł:"
+    - "\\(ujednoznacznienie\\)"
+    - "^Portal:"
+    - "^Wątek:"
+    - "^Topic:"
+    - "^User:"
+  redirect_keywords: ["#patrz", "#redirect", "#przekieruj", '#tam']
+
+# Italian
+IT:
+  section_patt: "(==\\s*(Note|Bibliografia|Altri progetti|Collegamenti esterni|Riferimenti|Voci correlate)\\s*==)"
+  filter_out_patterns:
+    - "^Wikipedia:"
+    - "^Aiuto:"
+    - "^Template:"
+    - "^MediaWiki:"
+    - "^Categoria:"
+    - "^Progetto:"
+    - "^Portale:"
+    - "^File:"
+    - "^Modulo:"
+    - "\\(disambiguazione\\)"
+    - "\\(disambigua\\)"
+    - "^Topic:"
+  redirect_keywords: ["#redirect", "#rinvia"]
+
+# Dutch
+NL:
+  section_patt: "(==\\s*(Noten|Bibliografie|Appendix|Externe links|Referenties|Bronnen|Zie ook|Overig|Ander|Literatuur|Voetnoten)\\s*==)"
+  filter_out_patterns:
+    - "^Wikipedia:"
+    - "^Help:"
+    - "^Sjabloon:"
+    - "^MediaWiki:"
+    - "^Categorie:"
+    - "^Portaal:"
+    - "^Bestand:"
+    - "^Module:"
+    - "\\(disambiguatie\\)"
+    - "\\(disambiguation\\)"
+  redirect_keywords: ["#redirect", "#doorverwijzing"]
+
+# Basque
+EUS:
+  section_patt: "(==\\s*(Oharrak|Bibliografia|Ahultasunak|Kanpo estekak|Erreferentziak|Ikus, gainera)\\s*==)"
+  filter_out_patterns:
+    - "^Wikipedia:"
+    - "^Laguntza:" # Help
+    - "^Txantiloi:" # Template
+    - "^MediaWiki:" 
+    - "^Kategoria:" # Category
+    - "^Maila:" 
+    - "^Atari:" # Portal
+    - "^Ataria:" # Portal
+    - "^Usuario:" # User
+    - "^Modulu:" # Module
+    - "^Fitxategi:" # File
+    - "^Wikiproiektua:" # Wikiproject
+    - "^Eranskina:" # Annex
+    - "^Txikipedia:"
+    - "^Zerrenda:"
+    - "\\(argipena\\)" # disambiguation pages
+  redirect_keywords: ["#birzuzendu", "#redirect"]
+
+# Hindi
+HI:
+  section_patt: "(==\\s*(टिप्पणियां|यह भी देखिए|संदर्भ सूची|बाहरी कड़ियाँ|सन्दर्भ|इन्हें भी देखें|इसके अतिरिक्त पठन)\\s*==)"
+  filter_out_patterns:
+    - "^विकिपीडिया:" # Wikipedia
+    - "^साँचा:" # Model, Template
+    - "^श्रेणी:" # Category
+    - "^मीडियाविकि:" # MediaWiki
+    - "^सहायता:" # Help
+    - "^प्रवेशद्वार:" # Portal
+    - "^मॉड्यूल:" # Module
+    - "^चित्र:" # File
+    - "^विकिपरियोजना:" # Wikiproject
+    - "\\(बहुविकल्पी\\)" # disambiguation pages
+  redirect_keywords: ["#पुनर्प्रेषित", "#अनुप्रेषित", "#redirect"]
+
+# German
+DE:
+  section_patt: "(==\\s*(Weblinks|Einzelnachweise|Einzelnachweise und Anmerkungen|Anmerkungen|Literatur|Siehe auch|Fußnoten|Veröffentlichungen)\\s*==)"
+  filter_out_patterns:
+    - "^Wikipedia:"
+    - "^Hilfe:" # Help
+    - "^Vorlage:" # Template
+    - "^MediaWiki:" 
+    - "^Kategorie:" # Category
+    - "^Portal:" # Portal
+    - "^Benutzer:" # User
+    - "^Modul:" # Module
+    - "^Datei:" # File
+    - "^Liste der:" # List of
+    - "^Liste des:"
+    - "^Liste von:"
+    - "\\(begriffsklärung\\)" # disambiguation pages
+  redirect_keywords: ["#weiterleitung ", "#redirect"]
+
+
+  
