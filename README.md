@@ -32,26 +32,7 @@ It supports multiple languages and provides both command-line and graphical inte
    pip install -e .
    ```
 
-   This will install all the required dependencies listed in `requirements.txt`:
-   - cramjam==2.9.1
-   - fastparquet==2024.2.0
-   - fsspec==2025.2.0
-   - numpy==1.24.4
-   - packaging==24.2
-   - pandas==2.0.3
-   - pyarrow==17.0.0
-   - PySide6==6.6.3.1
-   - PySide6_Addons==6.6.3.1
-   - PySide6_Essentials==6.6.3.1
-   - python-dateutil==2.9.0.post0
-   - pytz==2025.1
-   - PyYAML==6.0.2
-   - regex==2024.11.6
-   - shiboken6==6.6.3.1
-   - six==1.17.0
-   - tzdata==2025.1
-   - wcwidth==0.2.13
-   - wikitextparser==0.56.3
+   This will install all the required dependencies listed in [`requirements.txt`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/requirements.txt).
 
 ## Usage
 
@@ -121,12 +102,12 @@ To add support for a new language, update the YAML file with the appropriate set
 
 To add a new language:
 
-1. Edit `LANG_SETTINGS.yml` and add a new entry with:
+1. Edit [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/LANG_SETTINGS.yml) and add a new entry with:
    - `section_patt`: Regular expression for identifying reference sections
    - `filter_out_patterns`: Patterns for non-content pages to filter out
    - `redirect_keywords`: Keywords indicating redirect pages
 
-2. Update the language choices in the code (in `main.py` and `gui.py`)
+2. Update the language choices in the code (in [`main.py`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/main.py) and [`gui.py`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/gui.py))
 
 ## Technical Details
 
