@@ -1,9 +1,17 @@
+click==8.1.8
+cloudpickle==3.1.1
+colorama==0.4.6
 cramjam==2.9.1
+dask==2023.5.0
 fastparquet==2024.2.0
 fsspec==2025.2.0
+importlib_metadata==8.5.0
+locket==1.0.0
+MultiLGraphWiki==0.1.0
 numpy==1.24.4
 packaging==24.2
 pandas==2.0.3
+partd==1.4.1
 pyarrow==17.0.0
 PySide6==6.6.3.1
 PySide6_Addons==6.6.3.1
@@ -14,6 +22,9 @@ PyYAML==6.0.2
 regex==2024.11.6
 shiboken6==6.6.3.1
 six==1.17.0
+toolz==1.0.0
+tqdm==4.67.1
 tzdata==2025.1
 wcwidth==0.2.13
 wikitextparser==0.56.3
+zipp==3.20.2
