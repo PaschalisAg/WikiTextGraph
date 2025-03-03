@@ -4,31 +4,35 @@ from pathlib import Path
 
 def parse_requirements(filename='requirements.txt'):
     """
-    Load requirements from a pip requirements file.
+    Loads dependencies from a pip requirements file.
 
     Args:
-        filename (str): Path to the requirements file.
+        filename (str | Path, optional): Path to the requirements file. Defaults to 'requirements.txt'.
 
     Returns:
-        list: A list of required packages.
+        list: A list of required packages as strings.
     """
-    with open(filename, 'r', encoding='utf-8') as file:
+    filename = Path(filename)  # ensure cross-platform path handling
+    if not filename.exists():
+        return []  # return an empty list if file does not exist
+
+    with filename.open('r', encoding='utf-8') as file:
         lines = file.readlines()
-    
-    # Filter out comments and empty lines.
+
+    # filter out comments and empty lines
     reqs = [line.strip() for line in lines if line.strip() and not line.startswith('#')]
     return reqs
 
 
 setup(
-    name='wikidump_processor',
+    name='MultiLGraphWiki',
     version='0.1.0',
     packages=find_packages(),
     install_requires=parse_requirements(),
     entry_points={
         'console_scripts': [
-            # This creates a command-line tool named 'wikidump_processor'
-            'wikidump_processor=main:main',
+            # this creates a command-line tool named 'MultiLGraphWiki'
+            'MultiLGraphWiki=main:main',
         ],
     },
     author="Paschalis Agapitos",
@@ -39,8 +43,8 @@ setup(
         "if prompted, it will create a graph by resolving the redirects and maximizing the "
         "total number of valid links in the final version. Currently, it supports 9 languages "
         "but it can be extended by tweaking the `LANG_SETTINGS.yml` file. The supported "
-        "languages are: English (EN), Spanish (ES), Greek (GR), Polish (PL), German (DE), "
-        "Basque (EUS), Dutch (NL), Hindi (HI), and Italian (IT)."
+        "languages are: English (en), Spanish (es), Greek (el), Polish (pl), German (de), "
+        "Basque (eu), Dutch (nl), Hindi (hi), and Italian (it)."
     ),
     classifiers=[
         "Programming Language :: Python :: 3",

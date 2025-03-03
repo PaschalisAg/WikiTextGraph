@@ -1,17 +1,22 @@
 import yaml
 import re
+from pathlib import Path
+
 
 def load_language_settings(yaml_file="LANG_SETTINGS.yml"):
     """
-    Load language-specific settings from a YAML file.
+    Loads language-specific settings from a YAML file and compiles regex patterns.
 
     Args:
-        yaml_file (str): Path to the YAML file containing language settings.
+        yaml_file (str, optional): Path to the YAML file containing language settings.
+            Defaults to "LANG_SETTINGS.yml".
 
     Returns:
-        dict: A dictionary of language settings with compiled regex patterns.
+        dict: A dictionary containing language settings with compiled regex patterns.
     """
-    with open(yaml_file, "r", encoding="utf-8") as file:
+    yaml_file = Path(yaml_file).resolve()  # ensure cross-platform compatibility
+
+    with yaml_file.open("r", encoding="utf-8") as file:
         language_settings = yaml.safe_load(file)
 
     # compile regex patterns for section headers in each language
@@ -19,22 +24,26 @@ def load_language_settings(yaml_file="LANG_SETTINGS.yml"):
         settings["section_patt"] = re.compile(
             settings["section_patt"], flags=re.IGNORECASE
         )
-    
+
     return language_settings
 
-    
+
 def get_language_settings(language_code, yaml_file="LANG_SETTINGS.yml"):
     """
-    Retrieve settings for a specific language from the YAML configuration.
+    Retrieves settings for a specific language from the YAML configuration.
 
     Args:
-        language_code (str): The language code (e.g., "EN", "ES", "GR", "PL", "IT", "NL", "EUS", "HI", "DE").
-        yaml_file (str): Path to the YAML file containing language settings.
+        language_code (str): The language code (e.g., "en" for English, "es" for Spanish,
+            "el" for Greek, "pl" for Polish, "it" for Italian, "nl" for Dutch, 
+            "eu" for Basque, "hi" for Hindi, "de" for German).
+        yaml_file (str, optional): Path to the YAML file containing language settings.
+            Defaults to "LANG_SETTINGS.yml".
 
     Returns:
-        dict: A dictionary containing the language-specific settings.
+        dict: A dictionary containing the language-specific settings. If the specified 
+        language is not found, defaults to English ("en").
     """
     language_settings = load_language_settings(yaml_file)
-    
+
     # return the requested language settings, defaulting to English if not found
-    return language_settings.get(language_code, language_settings.get("EN", {}))
+    return language_settings.get(language_code, language_settings.get("en", {}))

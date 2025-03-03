@@ -1,5 +1,7 @@
+# Language codes must follow the ISO 639-1 standard
+
 # English
-EN:
+en:
   section_patt: "(==\\s*(See also|Publications|References|Notes|Footnotes|External links|Further reading)\\s*==|WP:SEEALSO)"
   filter_out_patterns:
     - "^Wikt:"
@@ -23,7 +25,7 @@ EN:
   redirect_keywords: ["#redirect"]
 
 # Spanish
-ES:
+es:
   section_patt: "(==\\s*(Véase también|Referencias|Notas|Enlaces externos|Bibliografía|Otra lectura)\\s*==)"
   filter_out_patterns:
     - "^Wikt:"
@@ -51,7 +53,7 @@ ES:
   redirect_keywords: ["#redirreción", "#redirrecion", "#redirect"]
 
 # Greek
-GR:
+el:
   section_patt: "(==\\s*(Δείτε επίσης|Δειτε επισης|Παραπομπές|Παραπομπες|Σημειώσεις|Σημειωσεις|Εξωτερικοί σύνδεσμοι|Εξωτερικοι συνδεσμοι|Προτεινόμενη βιβλιογραφία|Προτεινομενη βιβλιογραφια|Βιβλιογραφία|Βιβλιογραφια|Περαιτέρω ανάγνωση|Περαιτερω αναγνωση)\\s*==)"
   filter_out_patterns:
     - "^Wikt:"
@@ -83,7 +85,7 @@ GR:
   redirect_keywords: ["#ανακατεύθυνση", "#ανακατευθυνση", "#redirect"]
 
 # Polish
-PL:
+pl:
   section_patt: "(==\\s*(Zobasz też|Uwagi|Bibliografia|Przypisy|Linki zewnętrzne|Literatura w języku polskim)\\s*==)"
   filter_out_patterns:
     - "^Wikipedia:"
@@ -103,7 +105,7 @@ PL:
   redirect_keywords: ["#patrz", "#redirect", "#przekieruj", '#tam']
 
 # Italian
-IT:
+it:
   section_patt: "(==\\s*(Note|Bibliografia|Altri progetti|Collegamenti esterni|Riferimenti|Voci correlate)\\s*==)"
   filter_out_patterns:
     - "^Wikipedia:"
@@ -121,7 +123,7 @@ IT:
   redirect_keywords: ["#redirect", "#rinvia"]
 
 # Dutch
-NL:
+nl:
   section_patt: "(==\\s*(Noten|Bibliografie|Appendix|Externe links|Referenties|Bronnen|Zie ook|Overig|Ander|Literatuur|Voetnoten)\\s*==)"
   filter_out_patterns:
     - "^Wikipedia:"
@@ -137,7 +139,7 @@ NL:
   redirect_keywords: ["#redirect", "#doorverwijzing"]
 
 # Basque
-EUS:
+eu:
   section_patt: "(==\\s*(Oharrak|Bibliografia|Ahultasunak|Kanpo estekak|Erreferentziak|Ikus, gainera)\\s*==)"
   filter_out_patterns:
     - "^Wikipedia:"
@@ -159,7 +161,7 @@ EUS:
   redirect_keywords: ["#birzuzendu", "#redirect"]
 
 # Hindi
-HI:
+hi:
   section_patt: "(==\\s*(टिप्पणियां|यह भी देखिए|संदर्भ सूची|बाहरी कड़ियाँ|सन्दर्भ|इन्हें भी देखें|इसके अतिरिक्त पठन)\\s*==)"
   filter_out_patterns:
     - "^विकिपीडिया:" # Wikipedia
@@ -175,7 +177,7 @@ HI:
   redirect_keywords: ["#पुनर्प्रेषित", "#अनुप्रेषित", "#redirect"]
 
 # German
-DE:
+de:
   section_patt: "(==\\s*(Weblinks|Einzelnachweise|Einzelnachweise und Anmerkungen|Anmerkungen|Literatur|Siehe auch|Fußnoten|Veröffentlichungen)\\s*==)"
   filter_out_patterns:
     - "^Wikipedia:"
@@ -192,6 +194,3 @@ DE:
     - "^Liste von:"
     - "\\(begriffsklärung\\)" # disambiguation pages
   redirect_keywords: ["#weiterleitung ", "#redirect"]
-
-
-  
