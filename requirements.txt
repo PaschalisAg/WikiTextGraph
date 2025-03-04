@@ -7,7 +7,6 @@ fastparquet==2024.2.0
 fsspec==2025.2.0
 importlib_metadata==8.5.0
 locket==1.0.0
-MultiLGraphWiki==0.1.0
 numpy==1.24.4
 packaging==24.2
 pandas==2.0.3
