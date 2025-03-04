@@ -29,7 +29,7 @@ It supports multiple languages and provides both command-line and graphical inte
 
 2. Install the package and its dependencies:
    ```bash
-   pip install -e .
+   pip install -r requirements.txt
    ```
 
    This will install all the required dependencies listed in [`requirements.txt`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/requirements.txt).
@@ -90,9 +90,10 @@ base_dir/
 
 ## Language Support
 
-MultiLGraphWiki currently supports 9 languages. The language-specific settings are stored in `LANG_SETTINGS.yml`. Each language configuration includes:
+MultiLGraphWiki currently supports 9 languages. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/LANG_SETTINGS.yml). 
+Each language configuration includes:
 
-- Regular expressions for identifying sections like "References" and "See also"
+- Regular expressions for identifying sections like "References" and "See also" and many other
 - Patterns for filtering out non-content pages
 - Redirect keywords for identifying redirect pages
 
@@ -103,11 +104,13 @@ To add support for a new language, update the YAML file with the appropriate set
 To add a new language:
 
 1. Edit [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/LANG_SETTINGS.yml) and add a new entry with:
-   - `section_patt`: Regular expression for identifying reference sections
+   - `section_patt`: Regular expression for identifying non-content sections
    - `filter_out_patterns`: Patterns for non-content pages to filter out
    - `redirect_keywords`: Keywords indicating redirect pages
 
 2. Update the language choices in the code (in [`main.py`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/main.py) and [`gui.py`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/gui.py))
+
+3. Pull a request if you want to contribute to this project. We will evaluate your changes and if they align with the objective, we will accept and merge them to the algorithm.
 
 ## Technical Details
 
@@ -116,10 +119,19 @@ The processing pipeline consists of:
 1. Parsing the XML dump using SAX parsing for memory efficiency
 2. Cleaning the text by removing templates, references, and non-content sections
 3. Extracting wikilinks from the cleaned text
-4. Building a graph representation with articles as nodes and links as edges
+4. Building a graph representation with articles as nodes and wikilinks as edges
 5. Resolving redirects to ensure valid connections
 6. Removing duplicate edges and self-loops
 7. Saving the final graph data in Parquet format
+
+## Use Cases
+To mention a few of them:
+- **Network Science Research**
+   - Analyze structural properties and community detection in Wikipedia’s knowledge graph across multiple languages.
+- **Computational Linguistics**
+   - Compare linguistic and semantic coverage among languages to study translation gaps or cross-cultural topics.
+- **Knowledge Base Augmentation**
+   - Enrich your domain-specific knowledge base by integrating Wikipedia data and link structure as an external resource.
 
 ## License
 
@@ -140,8 +152,28 @@ However, the following conditions apply:
 
 For full details, see the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-## Author
-Paschalis Agapitos - pasxalisag9@gmail.com
+## Contributing
+
+Contributions via pull requests, issue reports, and feature suggestions are highly encouraged. 
+Please adhere to established coding guidelines and conventions. 
+If you find a bug or have a request, open a GitHub issue with a clear description.
+
+## Citation
+
+If you use MultiLGraphWiki in your research, we kindly request that you cite this repository:
+
+```latex
+@misc{MultiLGraphWiki,
+  author = {Paschalis Agapitos, Gustavo Ariel Schwartz},
+  title = {MultiLGraphWiki: A Multi-Language Wikipedia Graph Parser},
+  year = {2025},
+  howpublished = {\url{https://github.com/PaschalisAg/MultilGraphWiki}},
+}
+```
+
+## Contact
+
+For questions, suggestions, or collaborations, feel free to open an issue or reach out via email at pasxalisag9@gmail.com. 
 
 ## Acknowledgments
 Special thanks to Gustavo Ariel Schwartz, my PhD supervisor, for his valuable insights during the development of the algorithm.
