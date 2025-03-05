@@ -6,7 +6,7 @@ import webbrowser  # For opening links
 
 def gui_prompt_for_inputs():
     root = tk.Tk()
-    root.title("MultiLGraphWiki")
+    root.title("WikiTextGraph")
     root.geometry("550x750")  # Ensure everything fits without resizing
 
     # Revert to the previous color scheme that worked on macOS
@@ -22,7 +22,7 @@ def gui_prompt_for_inputs():
     root.columnconfigure(0, weight=1)  # Allow column expansion
 
     # Title
-    title_label = Label(root, text="MultiLGraphWiki", font=("Arial", 18, "bold"), bg=system_bg, fg=highlight_color)
+    title_label = Label(root, text="WikiTextGraph", font=("Arial", 18, "bold"), bg=system_bg, fg=highlight_color)
     title_label.grid(row=0, column=0, pady=(10, 5), sticky="ew")
 
     subtitle_label = Label(root, text="Wikipedia XML Dump Processing Tool", font=("Arial", 12), bg=system_bg, fg=text_color)
@@ -107,10 +107,10 @@ def gui_prompt_for_inputs():
 
     # Bottom Buttons
     def open_github():
-        webbrowser.open("https://github.com/PaschalisAg/MultilGraphWiki")
+        webbrowser.open("https://github.com/PaschalisAg/WikiTextGraph")
 
     def contact_developer():
-        webbrowser.open("mailto:pasxalisag9@gmail.com?subject=MultiLGraphWiki%20Support")
+        webbrowser.open("mailto:pasxalisag9@gmail.com?subject=WikiTextGraph%20Support")
 
     confirm_button = Button(root, text="Start Processing", font=("Arial", 12, "bold"), bg=button_color_start, fg=button_text_color, width=20, command=root.quit)
     confirm_button.grid(row=10, column=0, pady=10, sticky="ew")
