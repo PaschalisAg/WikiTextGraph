@@ -1,6 +1,6 @@
-# MultilGraphWiki
+# WikiTextGraph
 
-MultiLGraphWiki is a powerful tool for parsing Wikipedia dumps, cleaning article texts, and generating graph representations of Wikipedia's link structure. 
+`WikiTextGraph` is a Python package for parsing Wikipedia dumps, cleaning article texts, and generating graph representations of Wikipedia's link structure. 
 It supports multiple languages and provides both command-line and graphical interfaces for ease of use.
 
 ## Features
@@ -23,8 +23,8 @@ It supports multiple languages and provides both command-line and graphical inte
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/MultiLGraphWiki.git
-   cd MultiLGraphWiki
+   git clone https://github.com/yourusername/WikiTextGraph.git
+   cd WikiTextGraph
    ```
 
 2. Install the package and its dependencies:
@@ -32,7 +32,7 @@ It supports multiple languages and provides both command-line and graphical inte
    pip install -r requirements.txt
    ```
 
-   This will install all the required dependencies listed in [`requirements.txt`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/requirements.txt).
+   This will install all the required dependencies listed in [`requirements.txt`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/requirements.txt).
 
 ## Usage
 
@@ -90,7 +90,7 @@ base_dir/
 
 ## Language Support
 
-MultiLGraphWiki currently supports 9 languages. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/LANG_SETTINGS.yml). 
+WikiTextGraph currently supports 9 languages. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/LANG_SETTINGS.yml). 
 Each language configuration includes:
 
 - Regular expressions for identifying sections like "References" and "See also" and many other
@@ -103,12 +103,12 @@ To add support for a new language, update the YAML file with the appropriate set
 
 To add a new language:
 
-1. Edit [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/LANG_SETTINGS.yml) and add a new entry with:
+1. Edit [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/LANG_SETTINGS.yml) and add a new entry with:
    - `section_patt`: Regular expression for identifying non-content sections
    - `filter_out_patterns`: Patterns for non-content pages to filter out
    - `redirect_keywords`: Keywords indicating redirect pages
 
-2. Update the language choices in the code (in [`main.py`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/main.py) and [`gui.py`](https://github.com/PaschalisAg/MultilGraphWiki/blob/main/gui.py))
+2. Update the language choices in the code (in [`main.py`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/main.py) and [`gui.py`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/gui.py))
 
 3. Pull a request if you want to contribute to this project. We will evaluate your changes and if they align with the objective, we will accept and merge them to the algorithm.
 
@@ -135,7 +135,7 @@ To mention a few of them:
 
 ## License
 
-MultiLGraphWiki is licensed under the **Apache License 2.0**.
+WikiTextGraph is licensed under the **Apache License 2.0**.
 
 Under this license, you are free to:
 
@@ -160,14 +160,14 @@ If you find a bug or have a request, open a GitHub issue with a clear descriptio
 
 ## Citation
 
-If you use MultiLGraphWiki in your research, we kindly request that you cite this repository:
+If you use WikiTextGraph in your research, we kindly request that you cite this repository:
 
 ```latex
-@misc{MultiLGraphWiki,
+@misc{WikiTextGraph,
   author = {Paschalis Agapitos, Gustavo Ariel Schwartz},
-  title = {MultiLGraphWiki: A Multi-Language Wikipedia Graph Parser},
+  title = {WikiTextGraph: A Multi-Language Wikipedia Graph Parser},
   year = {2025},
-  howpublished = {\url{https://github.com/PaschalisAg/MultilGraphWiki}},
+  howpublished = {\url{https://github.com/PaschalisAg/WikiTextGraph}},
 }
 ```
 
