@@ -50,7 +50,8 @@ It supports multiple languages and provides both command-line and graphical inte
    - Step 4: Choose whether to generate a graph
    - Click "Confirm Selection" to start processing
 
-![The Graphic User Interface (GUI) of WikiTextGraph](/logo/gui_logo.png)
+![GUI](logo/gui_logo.png)
+
 
 ### For Technical Users (Command Line)
 
