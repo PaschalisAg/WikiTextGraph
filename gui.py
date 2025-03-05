@@ -125,3 +125,6 @@ def gui_prompt_for_inputs():
     contact_button.grid(row=0, column=1, padx=20)
 
     root.mainloop()
+    
+    # return the values so that the algorithm can start running
+    return dump_filepath, selected_language.get(), base_dir, generate_graph_flag.get()
