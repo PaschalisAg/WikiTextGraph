@@ -164,7 +164,7 @@ If you use WikiTextGraph in your research, we kindly request that you cite this 
 
 ```latex
 @misc{WikiTextGraph,
-  author = {Paschalis Agapitos, Gustavo Ariel Schwartz},
+  author = {Paschalis Agapitos, Juan Luis Suárez, Gustavo Ariel Schwartz},
   title = {WikiTextGraph: A Multi-Language Wikipedia Graph Parser},
   year = {2025},
   howpublished = {\url{https://github.com/PaschalisAg/WikiTextGraph}},
@@ -174,6 +174,3 @@ If you use WikiTextGraph in your research, we kindly request that you cite this 
 ## Contact
 
 For questions, suggestions, or collaborations, feel free to open an issue or reach out via email at pasxalisag9@gmail.com. 
-
-## Acknowledgments
-Special thanks to Gustavo Ariel Schwartz, my PhD supervisor, for his valuable insights during the development of the algorithm.
