@@ -50,8 +50,9 @@ It supports multiple languages and provides both command-line and graphical inte
    - Step 4: Choose whether to generate a graph
    - Click "Confirm Selection" to start processing
 
-<img src="logo/gui_logo.png" alt="GUI" width="400" height="400">
-
+<p align="center">
+  <img src="logo/gui_logo.png" alt="GUI" width="400" height="600">
+</p>
 
 ### For Technical Users (Command Line)
 
