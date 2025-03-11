@@ -8,7 +8,8 @@ from typing import Pattern, List
 refs_patt = re.compile(r'<\s*ref\b[^>]*\/\s*>|<\s*ref\b[^>]*>.*?<\s*\/\s*ref\s*>', flags=re.DOTALL)
 
 # regex for matching HTML comments in Wikipedia pages (e.g., <!-- This is a comment -->)
-comments_patt = re.compile(r'<\s*!-\-.*?\-\->', flags=re.DOTALL)
+comments_patt = re.compile(r'< !--[\s\S]*?-- >|<!--[\s\S]*?-->', flags=re.DOTALL)
+
 
 # regex to find the beginning of the main text (e.g., bolded text)
 beginning_of_main_text_patt = re.compile(r"'''(.*?)'''")
@@ -64,7 +65,9 @@ def extract_wiki_main_text(wiki_text: str, section_patt: Pattern) -> str:
     if end_main_text:
         end_index = end_main_text.start()
         cleaned_text = cleaned_text[:end_index]
-
+    
+    cleaned_text = cleaned_text.replace('& nbsp;', '').replace('.  ', '. ').replace(',  ', ', ')
+    
     return cleaned_text.strip()
 
 
