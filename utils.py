@@ -7,7 +7,7 @@ from typing import Pattern, List
 # regex for matching <ref> tags (references) in Wikipedia pages
 refs_patt = re.compile(r'<\s*ref\b[^>]*\/\s*>|<\s*ref\b[^>]*>.*?<\s*\/\s*ref\s*>', flags=re.DOTALL)
 
-# regex for matching HTML comments in Wikipedia pages (e.g., <!-- This is a comment -->)
+# regex for matching HTML comments in Wikipedia pages (e.g., <!-- This is a comment --> but < !-- This is also a comment -- >)
 comments_patt = re.compile(r'< !--[\s\S]*?-- >|<!--[\s\S]*?-->', flags=re.DOTALL)
 
 

@@ -20,6 +20,18 @@ def gui_prompt_for_inputs():
 
     root.configure(bg=system_bg)
     root.columnconfigure(0, weight=1)  # Allow column expansion
+    
+    def on_start():
+        nonlocal dump_filepath, base_dir  # Ensure modifications persist outside function
+        
+        if not dump_filepath or not base_dir:
+            tk.messagebox.showwarning("Missing Input", "Please select both a dump file and an output directory before proceeding.")
+            return  # Prevent closing if inputs are missing
+
+        # Quit the main loop and destroy the GUI
+        root.quit()
+        root.destroy()
+
 
     # Title
     title_label = Label(root, text="WikiTextGraph", font=("Arial", 18, "bold"), bg=system_bg, fg=highlight_color)
@@ -112,7 +124,7 @@ def gui_prompt_for_inputs():
     def contact_developer():
         webbrowser.open("mailto:pasxalisag9@gmail.com?subject=WikiTextGraph%20Support")
 
-    confirm_button = Button(root, text="Start Processing", font=("Arial", 12, "bold"), bg=button_color_start, fg=button_text_color, width=20, command=root.quit)
+    confirm_button = Button(root, text="Start Processing", font=("Arial", 12, "bold"), bg=button_color_start, fg=button_text_color, width=20, command=on_start)
     confirm_button.grid(row=10, column=0, pady=10, sticky="ew")
 
     lower_buttons_frame = Frame(root, bg=system_bg)
