@@ -10,12 +10,13 @@ def gui_prompt_for_inputs():
     root.geometry("550x750")  # Ensure everything fits without resizing
 
     # Revert to the previous color scheme that worked on macOS
-    system_bg = "white"  # Set to default white for macOS
-    text_color = "black"
-    highlight_color = "blue"  # Revert to standard blue for headings
-    button_color_start = "SystemButtonFace"  # Default macOS button color
-    button_color_github = "SystemButtonFace"
-    button_color_contact = "SystemButtonFace"
+        # Cross-platform safe color scheme
+    system_bg = "white"             # Safe, neutral background
+    text_color = "black"            # High contrast text
+    highlight_color = "blue"        # Standard heading highlight
+    button_color_start = "lightgray"       # Replaces SystemButtonFace
+    button_color_github = "lightgray"
+    button_color_contact = "lightgray"
     button_text_color = "black"
 
     root.configure(bg=system_bg)
