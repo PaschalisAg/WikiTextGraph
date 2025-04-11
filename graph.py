@@ -7,7 +7,7 @@ import pandas as pd
 import pyarrow.parquet as pq
 from utils import extract_wikilinks, resolve_redirects
 
-def generate_graph(language_code: str, settings: dict, input_file_path: Union[str, Path], graph_output_dir: Union[str, Path]):
+def generate_graph(language_code: str, settings: dict, input_file_path: Union[str, Path], graph_output_dir: Union[str, Path], use_string_labels: bool = False):
     """
     Generates a Wikipedia graph representation from a Parquet file containing Wikipedia titles and texts.
 
@@ -117,9 +117,26 @@ def generate_graph(language_code: str, settings: dict, input_file_path: Union[st
 
     # remove rows with null values in either the 'Source' or 'Target' columns
     final_graph_data = final_graph_data.dropna(subset=['Source', 'Target'])
+    combined = pd.concat([final_graph_data['Source'], final_graph_data['Target']], ignore_index=True)
+    labels, uniques = pd.factorize(combined)
+    assert len(labels) == 2 * len(final_graph_data), "Mismatch between factorized labels and graph size."
+    final_graph_data['Source'] = labels[:len(final_graph_data)] # first half are the source labels
+    final_graph_data['Target'] = labels[len(final_graph_data):] # second half are the target labels
+    mapping_df = pd.DataFrame({'id': range(len(uniques)), 'label': uniques})
+    mapping_df_path = graph_output_dir / f"{language_code}_node_id_mapping.parquet"
+    mapping_df.to_parquet(mapping_df_path, engine='fastparquet', compression='gzip')
 
     # save the cleaned and updated graph to a Parquet file
-    graph_parquet_path = graph_output_dir / f"{language_code}_graph_wiki_cleaned.parquet"
-    final_graph_data.to_parquet(graph_parquet_path, engine='fastparquet', compression='gzip')
+    # determine which format to output
+    if use_string_labels:
+        id_to_node = mapping_df.set_index('id')['label']
+        final_graph_data['Source'] = final_graph_data['Source'].map(id_to_node)
+        final_graph_data['Target'] = final_graph_data['Target'].map(id_to_node)
 
-    print(f"Graph data saved to {graph_parquet_path}")
+        graph_output_path = graph_output_dir / f"{language_code}_graph_wiki_labels.parquet"
+    else:
+        graph_output_path = graph_output_dir / f"{language_code}_graph_wiki_numerical.parquet"
+
+    # save graph
+    final_graph_data.to_parquet(graph_output_path, engine='fastparquet', compression='gzip')
+    print(f"Graph data saved to {graph_output_path}")

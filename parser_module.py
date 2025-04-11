@@ -85,7 +85,8 @@ class WikiXmlHandler(xml.sax.handler.ContentHandler):
         df['text'] = df['text'].apply(lambda x: extract_wiki_main_text(x, self.section_patt))
 
         if not df.empty:
-            table = pa.Table.from_pandas(df)
+            table = pa.Table.from_pandas(df, preserve_index=False)
+            # table = pa.Table.from_pandas(df)
             if self.parquet_writer is None:
                 self.parquet_writer = pq.ParquetWriter(str(self.output_file), table.schema, compression="gzip")
             self.parquet_writer.write_table(table)
@@ -132,7 +133,7 @@ def get_language_settings(language_code, yaml_file="LANG_SETTINGS.yml"):
     return language_settings.get(language_code, language_settings["en"])
 
 
-def parse_wikidump(dump_filepath, language_code="en", base_dir=None, generate_graph_flag=False):
+def parse_wikidump(dump_filepath, language_code="en", base_dir=None, generate_graph_flag=False, use_string_labels=False):
     """
     Parses a Wikipedia XML dump, extracts relevant content, and optionally generates a graph.
 
@@ -183,4 +184,4 @@ def parse_wikidump(dump_filepath, language_code="en", base_dir=None, generate_gr
     if generate_graph_flag:
         graph_output_dir = base_dir / language_code / "graph"
         graph_output_dir.mkdir(parents=True, exist_ok=True)
-        generate_graph(language_code, settings, str(titles_texts_file), str(graph_output_dir))
+        generate_graph(language_code, settings, str(titles_texts_file), str(graph_output_dir), use_string_labels=use_string_labels)

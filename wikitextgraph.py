@@ -22,8 +22,8 @@ def parse_args():
     )
     parser.add_argument(
         '--language_code', type=str,
-        choices=['en', 'es', 'el', 'pl', 'it', 'nl', 'eu', 'hi', 'de'],
-        help='Language code (en, es, el, pl, it, nl, eu, hi, de).'
+        choices=['en', 'es', 'el', 'pl', 'it', 'nl', 'eu', 'hi', 'de', 'vi'],
+        help='Language code (en, es, el, pl, it, nl, eu, hi, de, vi).'
     )
     parser.add_argument(
         '--base_dir', type=str, default=str(Path.cwd()),
@@ -52,12 +52,13 @@ def main():
 
     # if required arguments are missing, prompt user via GUI
     if not args.dump_filepath or not args.language_code:
-        dump_filepath, language_code, base_dir, generate_graph_flag = gui_prompt_for_inputs()
+        dump_filepath, language_code, base_dir, generate_graph_flag, use_string_labels = gui_prompt_for_inputs()
     else:
         dump_filepath = Path(args.dump_filepath)  # convert to Path object
         language_code = args.language_code
         base_dir = Path(args.base_dir) if args.base_dir else Path.cwd()
         generate_graph_flag = args.generate_graph
+        use_string_labels = False  # default numerical value for string labels
 
     # ensure base directory exists
     base_dir.mkdir(parents=True, exist_ok=True)
@@ -67,16 +68,13 @@ def main():
         dump_filepath=str(dump_filepath),  # convert Path to string for compatibility
         language_code=language_code,
         base_dir=str(base_dir),  # convert Path to string for compatibility
-        generate_graph_flag=generate_graph_flag
+        generate_graph_flag=generate_graph_flag,
+        use_string_labels=use_string_labels
     )
 
-    # generate graph if the flag is set
-    if generate_graph_flag:
-        settings = get_language_settings(language_code)
-        graph_output_dir = base_dir / language_code / "graph"
-        graph_output_dir.mkdir(parents=True, exist_ok=True)  # ensure directory exists
-        titles_texts_file = base_dir / language_code / "output" / f"{language_code}_WP_titles_texts.parquet"
-        generate_graph(language_code, settings, str(titles_texts_file), str(graph_output_dir))
+    # No need to call generate_graph here; it is already called inside parse_wikidump
+    pass
+
 
 
 if __name__ == "__main__":

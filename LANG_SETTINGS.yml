@@ -194,3 +194,20 @@ de:
     - "^Liste von:"
     - "\\(begriffsklärung\\)" # disambiguation pages
   redirect_keywords: ["#weiterleitung ", "#redirect"]
+
+# Vietnamese
+vi:
+  section_patt: "(==\\s*(Xem thêm|Tham khảo|Liên kết ngoài|Tài liệu tham khảo|Tài liệu|Ghi chú|Chú thích|Tài liệu khác|Hình ảnh|Đọc thêm)\\s*==)"
+  filter_out_patterns:
+    - "^Wikipedia:"
+    - "^MediaWiki:"
+    - "^Trợ giúp:" # Help
+    - "^Bản mẫu:" # Template
+    - "^Tập tin:" # File
+    - "^Thể loại:" # Category
+    - "^Sách:" # Book
+    - "^Danh sách:" # List of  
+    - "^Cổng thông tin:" # Portal
+    - "^Mô đun:" # Module
+    - "\\(định hướng\\)" # disambiguation pages
+  redirect_keywords: ["#đổi", "#redirect"]

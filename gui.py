@@ -84,7 +84,7 @@ def gui_prompt_for_inputs():
     step2_label = Label(main_frame, text="Step 2: Select Language", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
     step2_label.grid(row=3, column=0, sticky="w", pady=(10, 5))
 
-    available_languages = ['en', 'es', 'el', 'pl', 'it', 'nl', 'eu', 'hi', 'de']
+    available_languages = ["en", "es", "el", "pl", "it", "nl", "eu", "hi", "de", "vi"]
     selected_language.set(available_languages[0])
 
     dropdown = OptionMenu(main_frame, selected_language, *available_languages)
@@ -99,6 +99,17 @@ def gui_prompt_for_inputs():
 
     no_radio = Radiobutton(main_frame, text="No", variable=generate_graph_flag, value=False, bg=system_bg, fg=text_color)
     no_radio.grid(row=6, column=1, sticky="w")
+    
+    string2id_label = Label(main_frame, text="Node Label Format", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
+    string2id_label.grid(row=7, column=0, sticky="w", pady=(10, 5))
+
+    use_string_labels = BooleanVar(value=False)
+    label_option = tk.Checkbutton(main_frame,
+                                  text="Keep node labels as strings instead of replacing them with numeric IDs",
+                                  variable=use_string_labels,
+                                  onvalue=True, offvalue=False,
+                                  bg=system_bg, fg=text_color)
+    label_option.grid(row=8, column=0, sticky="w", pady=(0, 10))
 
     # Step 4: Select Output Folder
     step4_label = Label(main_frame, text="Step 4: Select Output Directory", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
@@ -112,10 +123,10 @@ def gui_prompt_for_inputs():
             dir_label.config(text=f"Selected: {base_dir}")
 
     dir_button = Button(main_frame, text="Browse...", command=select_output_dir, bg=button_color_start, fg=button_text_color, width=15)
-    dir_button.grid(row=8, column=0, sticky="w", pady=(0, 5))
+    dir_button.grid(row=9, column=0, sticky="w", pady=(0, 5))
 
     dir_label = Label(main_frame, text="No directory selected", bg=system_bg, fg=text_color)
-    dir_label.grid(row=9, column=0, sticky="w", pady=(0, 10))
+    dir_label.grid(row=10, column=0, sticky="w", pady=(0, 10))
 
     # Bottom Buttons
     def open_github():
@@ -125,10 +136,10 @@ def gui_prompt_for_inputs():
         webbrowser.open("mailto:pasxalisag9@gmail.com?subject=WikiTextGraph%20Support")
 
     confirm_button = Button(root, text="Start Processing", font=("Arial", 12, "bold"), bg=button_color_start, fg=button_text_color, width=20, command=on_start)
-    confirm_button.grid(row=10, column=0, pady=10, sticky="ew")
+    confirm_button.grid(row=11, column=0, pady=10, sticky="ew")
 
     lower_buttons_frame = Frame(root, bg=system_bg)
-    lower_buttons_frame.grid(row=11, column=0, pady=10)
+    lower_buttons_frame.grid(row=12, column=0, pady=10)
 
     github_button = Button(lower_buttons_frame, text="GitHub Repo", font=("Arial", 12), bg=button_color_github, fg=button_text_color, width=15, command=open_github)
     github_button.grid(row=0, column=0, padx=20)
@@ -139,4 +150,4 @@ def gui_prompt_for_inputs():
     root.mainloop()
     
     # return the values so that the algorithm can start running
-    return dump_filepath, selected_language.get(), base_dir, generate_graph_flag.get()
+    return dump_filepath, selected_language.get(), base_dir, generate_graph_flag.get(), use_string_labels.get()
