@@ -5,52 +5,70 @@ from pathlib import Path
 import webbrowser  # For opening links
 
 def gui_prompt_for_inputs():
+    """
+    Launches a Tkinter-based GUI to prompt for user inputs:
+      1) Wikipedia dump file path,
+      2) Output directory,
+      3) Language code,
+      4) Whether or not to generate a graph,
+      5) Whether to use string labels or numeric IDs for the final graph.
+
+    Returns:
+        (dump_filepath, selected_language, base_dir, generate_graph_flag, use_string_labels):
+        A tuple containing the file path of the Wikipedia dump, the selected language,
+        the output directory, a boolean to indicate whether to generate a graph,
+        and a boolean to choose string vs. numeric labels in the graph edges.
+    """
     root = tk.Tk()
     root.title("WikiTextGraph")
-    root.geometry("550x750")  # Ensure everything fits without resizing
+    root.geometry("550x750")  # ensure everything fits without resizing
 
-    # Revert to the previous color scheme that worked on macOS
-        # Cross-platform safe color scheme
-    system_bg = "white"             # Safe, neutral background
-    text_color = "black"            # High contrast text
-    highlight_color = "blue"        # Standard heading highlight
-    button_color_start = "lightgray"       # Replaces SystemButtonFace
+    # revert to the previous color scheme that worked on macOS
+    # cross-platform safe color scheme
+    system_bg = "white" # safe, neutral background
+    text_color = "black" # high contrast text
+    highlight_color = "blue" # standard heading highlight
+    button_color_start = "lightgray" # replaces SystemButtonFace
     button_color_github = "lightgray"
     button_color_contact = "lightgray"
     button_text_color = "black"
 
     root.configure(bg=system_bg)
-    root.columnconfigure(0, weight=1)  # Allow column expansion
+    root.columnconfigure(0, weight=1)  # allow column expansion
     
     def on_start():
-        nonlocal dump_filepath, base_dir  # Ensure modifications persist outside function
+        """
+        Callback for the "Start Processing" button. Validates user inputs and
+        closes the GUI if everything is set.
+        """
+        nonlocal dump_filepath, base_dir  # ensure modifications persist outside function
         
         if not dump_filepath or not base_dir:
             tk.messagebox.showwarning("Missing Input", "Please select both a dump file and an output directory before proceeding.")
-            return  # Prevent closing if inputs are missing
+            return  # prevent closing if inputs are missing
 
-        # Quit the main loop and destroy the GUI
+        # quit the main loop and destroy the GUI
         root.quit()
         root.destroy()
 
 
-    # Title
+    # title
     title_label = Label(root, text="WikiTextGraph", font=("Arial", 18, "bold"), bg=system_bg, fg=highlight_color)
     title_label.grid(row=0, column=0, pady=(10, 5), sticky="ew")
 
     subtitle_label = Label(root, text="Wikipedia XML Dump Processing Tool", font=("Arial", 12), bg=system_bg, fg=text_color)
     subtitle_label.grid(row=1, column=0, pady=(0, 5), sticky="ew")
 
-    # Load Logo (Smaller, with Funding Acknowledgment)
+    # load Logo
     try:
         logo_path = "logo/mestizajes_logo-removebg-preview.png"
         if os.path.exists(logo_path):
-            logo_img = PhotoImage(file=logo_path).subsample(3, 3)  # Reduce size by 3x
+            logo_img = PhotoImage(file=logo_path).subsample(3, 3)  # reduce size
             logo_label = Label(root, image=logo_img, bg=system_bg)
             logo_label.grid(row=2, column=0, pady=(0, 2), sticky="n")
-            logo_label.image = logo_img  # Keep reference
+            logo_label.image = logo_img  # keep reference
 
-            # Funding acknowledgment text
+            # funding acknowledgment text
             funding_label = Label(root, text="Funded by Mestizajes", font=("Arial", 10, "italic"), bg=system_bg, fg=text_color)
             funding_label.grid(row=3, column=0, pady=(0, 10), sticky="n")
     except Exception as e:
