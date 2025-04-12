@@ -16,7 +16,7 @@ It supports multiple languages and provides both command-line and graphical inte
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.9 or higher
 
 ### Installation Steps
 
@@ -85,15 +85,17 @@ The tool creates the following directory structure:
 base_dir/
 └── en/
     ├── output/
-    │   └── en_WP_titles_texts.parquet
+    │   └── {language_code}_WP_titles_texts.parquet
     └── graph/
         ├── redirects_rev_mapping.pkl.gzip
-        └── en_graph_wiki_numerical.parquet
+        ├── {language_code}_id_node_mapping.parquet
+        └── {language_code}_wiki_graph.parquet
 ```
 
-- `language_code_WP_titles_texts.parquet`: Contains the titles and cleaned text of each Wikipedia article
-- `redirects_rev_mapping.pkl.gzip`: Mappings for redirect resolution
-- `language_code_graph_wiki_cleaned.parquet`: The final graph representation with Source/Target pairs
+- `{language_code}_WP_titles_texts.parquet`: Contains the titles and cleaned text of each Wikipedia article.
+- `redirects_rev_mapping.pkl.gzip`: Mappings for redirect resolution.
+- `{language_code}_id_node_mapping.parquet`: Contains the id and its corresponding string value for easier access.
+- `{language_code}_wiki_graph_.parquet`: The final graph representation with Source/Target pairs.
 
 ## Language Support
 
