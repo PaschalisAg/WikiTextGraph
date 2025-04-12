@@ -11,13 +11,11 @@ def gui_prompt_for_inputs():
       2) Output directory,
       3) Language code,
       4) Whether or not to generate a graph,
-      5) Whether to use string labels or numeric IDs for the final graph.
 
     Returns:
-        (dump_filepath, selected_language, base_dir, generate_graph_flag, use_string_labels):
+        (dump_filepath, selected_language, base_dir, generate_graph_flag):
         A tuple containing the file path of the Wikipedia dump, the selected language,
         the output directory, a boolean to indicate whether to generate a graph,
-        and a boolean to choose string vs. numeric labels in the graph edges.
     """
     root = tk.Tk()
     root.title("WikiTextGraph")
@@ -82,11 +80,15 @@ def gui_prompt_for_inputs():
     generate_graph_flag = BooleanVar(value=True)
     base_dir = None
 
-    # Step 1: Select Dump File
+    # step 1: Select Dump File
     step1_label = Label(main_frame, text="Step 1: Select Compressed XML Dump File", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
     step1_label.grid(row=0, column=0, sticky="w", pady=(10, 5))
 
     def select_dump_file():
+        """
+        Opens a file dialog for the user to select a compressed Wikipedia XML dump
+        (typically .bz2).
+        """
         nonlocal dump_filepath
         selected_file = filedialog.askopenfilename(title="Select the compressed XML dump file", filetypes=[("BZ2 files", "*.bz2"), ("All files", "*.*")])
         if selected_file:
@@ -99,7 +101,7 @@ def gui_prompt_for_inputs():
     dump_file_label = Label(main_frame, text="No file selected", bg=system_bg, fg=text_color)
     dump_file_label.grid(row=2, column=0, sticky="w", pady=(0, 10))
 
-    # Step 2: Select Language
+    # step 2: Select Language
     step2_label = Label(main_frame, text="Step 2: Select Language", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
     step2_label.grid(row=3, column=0, sticky="w", pady=(10, 5))
 
@@ -109,7 +111,7 @@ def gui_prompt_for_inputs():
     dropdown = OptionMenu(main_frame, selected_language, *available_languages)
     dropdown.grid(row=4, column=0, sticky="w")
 
-    # Step 3: Generate Graph?
+    # step 3: Generate Graph (optional)
     step3_label = Label(main_frame, text="Step 3: Generate Graph", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
     step3_label.grid(row=5, column=0, sticky="w", pady=(10, 5))
 
@@ -119,22 +121,25 @@ def gui_prompt_for_inputs():
     no_radio = Radiobutton(main_frame, text="No", variable=generate_graph_flag, value=False, bg=system_bg, fg=text_color)
     no_radio.grid(row=6, column=1, sticky="w")
     
-    string2id_label = Label(main_frame, text="Node Label Format", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
-    string2id_label.grid(row=7, column=0, sticky="w", pady=(10, 5))
+    # string2id_label = Label(main_frame, text="Node Label Format", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
+    # string2id_label.grid(row=7, column=0, sticky="w", pady=(10, 5))
 
-    use_string_labels = BooleanVar(value=False)
-    label_option = tk.Checkbutton(main_frame,
-                                  text="Keep node labels as strings instead of replacing them with numeric IDs",
-                                  variable=use_string_labels,
-                                  onvalue=True, offvalue=False,
-                                  bg=system_bg, fg=text_color)
-    label_option.grid(row=8, column=0, sticky="w", pady=(0, 10))
+    # use_string_labels = BooleanVar(value=False)
+    # label_option = tk.Checkbutton(main_frame,
+                                  # text="Keep node labels as strings instead of replacing them with numeric IDs",
+                                  # variable=use_string_labels,
+                                 #  onvalue=True, offvalue=False,
+                                 #  bg=system_bg, fg=text_color)
+    # label_option.grid(row=8, column=0, sticky="w", pady=(0, 10))
 
-    # Step 4: Select Output Folder
+    # step 4: Select Output Folder
     step4_label = Label(main_frame, text="Step 4: Select Output Directory", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
     step4_label.grid(row=7, column=0, sticky="w", pady=(10, 5))
 
     def select_output_dir():
+        """
+        Opens a directory dialog for the user to choose a base output directory.
+        """
         nonlocal base_dir
         selected_dir = filedialog.askdirectory(title="Select the output directory")
         if selected_dir:
@@ -147,11 +152,13 @@ def gui_prompt_for_inputs():
     dir_label = Label(main_frame, text="No directory selected", bg=system_bg, fg=text_color)
     dir_label.grid(row=10, column=0, sticky="w", pady=(0, 10))
 
-    # Bottom Buttons
+    # bottom Buttons
     def open_github():
+        """Open the GitHub repository link in the web browser."""
         webbrowser.open("https://github.com/PaschalisAg/WikiTextGraph")
 
     def contact_developer():
+        """Open an email client to contact the developer."""
         webbrowser.open("mailto:pasxalisag9@gmail.com?subject=WikiTextGraph%20Support")
 
     confirm_button = Button(root, text="Start Processing", font=("Arial", 12, "bold"), bg=button_color_start, fg=button_text_color, width=20, command=on_start)
@@ -169,4 +176,4 @@ def gui_prompt_for_inputs():
     root.mainloop()
     
     # return the values so that the algorithm can start running
-    return dump_filepath, selected_language.get(), base_dir, generate_graph_flag.get(), use_string_labels.get()
+    return dump_filepath, selected_language.get(), base_dir, generate_graph_flag.get()# , use_string_labels.get()

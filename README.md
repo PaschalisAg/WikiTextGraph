@@ -8,7 +8,7 @@ It supports multiple languages and provides both command-line and graphical inte
 - Parse Wikipedia XML dumps and extract article titles and cleaned text
 - Generate graph representations of Wikipedia's link structure
 - Resolve redirects to maximize valid links in the final graph
-- Support for 9 languages: English (en), Spanish (es), Greek (el), Polish (pl), German (de), Basque (eu), Dutch (nl), Hindi (hi), and Italian (it)
+- Support for 10 languages: English (en), Spanish (es), Greek (el), Polish (pl), German (de), Basque (eu), Dutch (nl), Hindi (hi), and Italian (it), Vietnamese (vi)
 - Extensible language support through configuration
 - User-friendly GUI for non-technical users
 
@@ -17,7 +17,6 @@ It supports multiple languages and provides both command-line and graphical inte
 ### Prerequisites
 
 - Python 3.8 or higher
-- pip package manager
 
 ### Installation Steps
 
@@ -40,7 +39,7 @@ It supports multiple languages and provides both command-line and graphical inte
 
 1. Launch the application:
    ```bash
-   python main.py
+   python wikitextgraph.py
    ```
 
 2. Follow the steps in the GUI:
@@ -64,14 +63,18 @@ python main.py --dump_filepath /path/to/dump.bz2 --language_code EN --base_dir /
 
 Options:
 - `--dump_filepath`: Path to the compressed Wikipedia XML dump file
-- `--language_code`: Language code (EN, ES, GR, PL, IT, NL, EUS, HI, DE)
+- `--language_code`: Language code (en, es, el, pl, it, nl, eu, hi, de, vi)
 - `--base_dir`: Base directory for output files (defaults to current directory)
 - `--generate_graph`: Flag to generate the graph (optional)
 
 You can also use the installed command-line tool:
 
 ```bash
-wikidump_processor --dump_filepath /path/to/dump.bz2 --language_code EN --generate_graph
+python wikitextgraph.py \
+  --dump_filepath /path/to/dump.bz2 \
+  --language_code en \
+  --base_dir /path/to/output \
+  --generate_graph
 ```
 
 ## Output
@@ -80,12 +83,12 @@ The tool creates the following directory structure:
 
 ```
 base_dir/
-└── language_code/
+└── en/
     ├── output/
-    │   └── language_code_WP_titles_texts.parquet
+    │   └── en_WP_titles_texts.parquet
     └── graph/
         ├── redirects_rev_mapping.pkl.gzip
-        └── language_code_graph_wiki_cleaned.parquet
+        └── en_graph_wiki_numerical.parquet
 ```
 
 - `language_code_WP_titles_texts.parquet`: Contains the titles and cleaned text of each Wikipedia article
@@ -94,7 +97,7 @@ base_dir/
 
 ## Language Support
 
-WikiTextGraph currently supports 9 languages. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/LANG_SETTINGS.yml). 
+WikiTextGraph currently supports 10 languages. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/LANG_SETTINGS.yml). 
 Each language configuration includes:
 
 - Regular expressions for identifying sections like "References" and "See also" and many other
