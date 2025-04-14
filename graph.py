@@ -139,10 +139,10 @@ def generate_graph(
     final_graph_data['Target'] = labels[len(final_graph_data):] # second half are the target labels
     # create a mapping from numeric ID to string label for possible future use and for easier replacement
     mapping_df = pd.DataFrame({'id': range(len(uniques)), 'label': uniques})
-    mapping_df_path = graph_output_dir / f"{language_code}_node_id_mapping.parquet"
+    mapping_df_path = graph_output_dir / f"{language_code}_id_node_mapping.parquet"
     mapping_df.to_parquet(mapping_df_path, engine='fastparquet', compression='gzip')
     
     # save graph
-    graph_output_path = graph_output_dir / f"{language_code}_graph_wiki.parquet"
+    graph_output_path = graph_output_dir / f"{language_code}_wiki_graph.parquet"
     final_graph_data.to_parquet(graph_output_path, engine='fastparquet', compression='gzip')
     print(f"Graph data saved to {graph_output_path}")
