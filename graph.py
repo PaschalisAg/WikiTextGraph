@@ -5,7 +5,7 @@ import gzip
 import pickle
 import pandas as pd
 import pyarrow.parquet as pq
-from utils import extract_wikilinks, resolve_redirects
+from utils import extract_wikilinks, resolve_redirects, fix_dubious_links
 
 def generate_graph(
     language_code: str,
@@ -39,18 +39,17 @@ def generate_graph(
 
     # extract filter patterns and redirect keywords from settings
     filter_out_patterns = settings['filter_out_patterns']
-    redirect_keywords = [kw.lower() for kw in settings['redirect_keywords']]  # normalize to lowercase
+    redirect_keywords = [kw.lower() for kw in settings['redirect_keywords']]
 
     # regex pattern for extracting Wikipedia-style wikilinks
     wiki_link_regex = re.compile(
         r'\[\['
-        r'([^\|\[\]#]+)'  # capture the correct Wikipedia page title
-        r'(?:\|[^\]]+)?'  # ignore display text if it exists
+        r'([^\|\[\]#]+)'
+        r'(?:\|[^\]]+)?'
         r'\]\]'
     )
 
     parquet_file = pq.ParquetFile(input_file_path)
-
     all_graph_data = []
 
     # iterate over the input file in batches
@@ -66,12 +65,16 @@ def generate_graph(
 
         df['wikilinks'] = df['text'].apply(lambda x: extract_wikilinks(wiki_link_regex, x))
 
-        # explode the DataFrame to create "Source" and "Target" column
+        # explode the DataFrame to create "Source" and "Target" columns
         graph_data = (
             df.explode('wikilinks')
-            .rename(columns={'title': 'Source', 'wikilinks': 'Target'})
-            .drop(columns=['text'], errors='ignore')
+              .rename(columns={'title': 'Source', 'wikilinks': 'Target'})
+              .drop(columns=['text'], errors='ignore')
         )
+
+        # normalize underscores in both Source and Target columns
+        graph_data['Source'] = graph_data['Source'].apply(fix_dubious_links)
+        graph_data['Target'] = graph_data['Target'].apply(fix_dubious_links)
 
         # apply filtering and normalization
         graph_data = graph_data[~graph_data['Source'].str.contains("|".join(filter_out_patterns), flags=re.IGNORECASE, na=False)]
@@ -113,12 +116,12 @@ def generate_graph(
 
     # normalize the reverse redirect dictionary to lowercase
     normalised_rev_red_dict = {k.lower(): v.lower() for k, v in reverse_redirect_dict.items()}
+    normalised_rev_red_dict = {fix_dubious_links(k.lower()): fix_dubious_links(v.lower()) for k, v in reverse_redirect_dict.items()}
 
     # resolve redirects in the 'Target' column
     final_graph_data['Target'] = resolve_redirects(final_graph_data['Target'], normalised_rev_red_dict)
 
     # remove rows where Source and Target are identical (self-loops) after redirect resolution
-    # we do it again because after the resolution of the redirects we might have some self-edges
     final_graph_data = final_graph_data[final_graph_data['Source'] != final_graph_data['Target']]
 
     # drop duplicate rows but keep the first occurrence
@@ -135,8 +138,8 @@ def generate_graph(
     combined = pd.concat([final_graph_data['Source'], final_graph_data['Target']], ignore_index=True)
     labels, uniques = pd.factorize(combined)
     assert len(labels) == 2 * len(final_graph_data), "Mismatch between factorized labels and graph size."
-    final_graph_data['Source'] = labels[:len(final_graph_data)] # first half are the source labels
-    final_graph_data['Target'] = labels[len(final_graph_data):] # second half are the target labels
+    final_graph_data['Source'] = labels[:len(final_graph_data)]  # first half are the source labels
+    final_graph_data['Target'] = labels[len(final_graph_data):]  # second half are the target labels
     # create a mapping from numeric ID to string label for possible future use and for easier replacement
     mapping_df = pd.DataFrame({'id': range(len(uniques)), 'label': uniques})
     mapping_df_path = graph_output_dir / f"{language_code}_id_node_mapping.parquet"
