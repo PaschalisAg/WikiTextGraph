@@ -143,6 +143,8 @@ def parse_wikidump(dump_filepath, language_code="en", base_dir=None, generate_gr
         base_dir (str | Path, optional): Base directory for storing output files. Defaults to None.
         generate_graph_flag (bool, optional): Whether to generate a graph after parsing. Defaults to False.
     """
+    # print statement to show that the processing has started
+    print(f"Processing the dump: {dump_filepath}.")
     settings = get_language_settings(language_code)
     section_patt = settings["section_patt"]
     filter_out_patterns = settings.get('filter_out_patterns', [])
@@ -182,6 +184,7 @@ def parse_wikidump(dump_filepath, language_code="en", base_dir=None, generate_gr
 
     # generate graph if the flag is set
     if generate_graph_flag:
+        print("Creating the graph...")
         graph_output_dir = base_dir / language_code / "graph"
         graph_output_dir.mkdir(parents=True, exist_ok=True)
         generate_graph(language_code, settings, str(titles_texts_file), str(graph_output_dir), use_string_labels=use_string_labels)

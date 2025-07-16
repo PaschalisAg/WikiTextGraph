@@ -60,6 +60,10 @@ def main():
         generate_graph_flag = args.generate_graph
         # use_string_labels = False  # default numerical value for string labels
 
+    # make sure that the user is feeding the proper file
+    if not str(dump_filepath).endswith("-pages-articles-multistream.xml.bz2"):
+        raise ValueError("Invalid dump file: the file must end with '-pages-articles-multistream.xml.bz2'. \n Can be found here: `https://dumps.wikimedia.org/backup-index.html`")
+    
     # ensure base directory exists
     base_dir.mkdir(parents=True, exist_ok=True)
 
