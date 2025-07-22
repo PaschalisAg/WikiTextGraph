@@ -1,5 +1,7 @@
 # WikiTextGraph: A Python Tool for Parsing Multilingual Wikipedia Text and Graph Extraction
 
+Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16260544.svg)](https://doi.org/10.5281/zenodo.16260544)
+
 `WikiTextGraph` is a Python package for parsing Wikipedia dumps, cleaning article texts, and generating graph representations of Wikipedia's link structure. 
 It supports multiple languages and provides both command-line and graphical interfaces for ease of use.
 
