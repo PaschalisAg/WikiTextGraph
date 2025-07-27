@@ -52,7 +52,10 @@ It supports multiple languages and provides both command-line and graphical inte
    - Click "Confirm Selection" to start processing
 
 <p align="center">
-  <img src="logo/gui_logo.png" alt="GUI" width="400" height="500">
+  <figure>
+    <img src="logo/gui_logo.png" alt="GUI" width="400" height="500">
+    <figcaption style="text-align: center;">This is the GUI logo</figcaption>
+  </figure>
 </p>
 
 ### For Technical Users (Command Line)
