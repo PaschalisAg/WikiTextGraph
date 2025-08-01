@@ -50,7 +50,7 @@ es:
     - "^User:"
     - "^Módulo:"
     - "^Modulo:"
-  redirect_keywords: ["#redirreción", "#redirrecion", "#redirect"]
+  redirect_keywords: ["#redirreción", "#redirrecion", "#redirect", "#redirección"]
 
 # Greek
 el:
