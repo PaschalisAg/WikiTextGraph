@@ -50,7 +50,7 @@ es:
     - "^User:"
     - "^Módulo:"
     - "^Modulo:"
-  redirect_keywords: ["#redirreción", "#redirrecion", "#redirect", "#redirección"]
+  redirect_keywords: ["#redirección", "#redireccion", "#redirect"]
 
 # Greek
 el:
@@ -211,3 +211,20 @@ vi:
     - "^Mô đun:" # Module
     - "\\(định hướng\\)" # disambiguation pages
   redirect_keywords: ["#đổi", "#redirect"]
+
+# # Ukranian
+# ua:
+#   section_patt: "(==\\s*(||||||||)\\s*==)"
+#   filter_out_patterns:
+#     - "^Wikipedia:"
+#     - "^Вікіпедія:" # Wikipedia:
+#     - "^MediaWiki:"
+#     - "^Файл:" # File:
+#     - "^Категорія:" # Category:
+#     - "^Довідка:" # Reference:
+#     - "^Шаблон:" # Template
+#     - "^Портал:" # Portal:
+#     - "^Допомога:" # Help:
+#     - "^Модуль:"
+#     - "\\(định hướng\\)" # disambiguation pages
+#   redirect_keywords: ["#redirect", "#перенаправлення"]
