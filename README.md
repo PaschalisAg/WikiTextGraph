@@ -1,8 +1,7 @@
 # WikiTextGraph: A Python Tool for Parsing Multilingual Wikipedia Text and Graph Extraction
 
-Zenodo: [![DOI](https://zenodo.org/static/images/invenio-rdm.svg)](https://doi.org/10.5281/zenodo.16260544)
-
-Paper: [![DOI](https://storage.googleapis.com/jnl-up-j-jors-public/journals/1/pageHeaderLogoImage_en_US.png?t=1757960580000)](https://openresearchsoftware.metajnl.com/articles/10.5334/jors.572)
+[![DOI: Software](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.16260544-blue?logo=zenodo)](https://doi.org/10.5281/zenodo.16260544)
+[![DOI: Paper](https://img.shields.io/badge/DOI-10.5334%2Fjors.572-red?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2UyMjMxOCIgZD0iTTEyIDIyLjI2bC03LjY0LTcuNjRhMSAxIDAgMCAxIDAtMS40MWw3LjY0LTcuNjRhMSAxIDAgMCAxIDEuNDEgMGw3LjY0IDcuNjRhMSAxIDAgMCAxIDAgMS40MUwxMy40MSAxMmwxLjE5IDEuMTlsNy42NCA3LjY0YTEgMSAwIDAgMSAwIDEuNDFsLTcuNjQgNy42NGExIDEgMCAwIDEtMS40MSAwbC03LjY0LTcuNjRhMSAxIDAgMCAxIDAtMS40MUwxMiAxMi40MWwtMS4xOS0xLjE5eiIvPjwvc3ZnPg==)](https://openresearchsoftware.metajnl.com/articles/10.5334/jors.572)
 
 `WikiTextGraph` is a Python package for parsing Wikipedia dumps, cleaning article texts, and generating graph representations of Wikipedia's link structure. 
 It supports multiple languages and provides both command-line and graphical interfaces for ease of use.
