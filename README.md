@@ -7,7 +7,9 @@
 
 WikiTextGraph currently supports **11** languages but is constantly updated. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/LANG_SETTINGS.yml).
 
-## 🌍 Supported Languages
+If you want to add a new language and enter the Pantheon of Acknowledgments below, go to [`Adding a new language`](https://github.com/PaschalisAg/WikiTextGraph?tab=readme-ov-file#adding-a-new-language) or email us.
+
+## Supported Languages
 
 | Flag | Language     | Code |
 |:----:|--------------|:----:|
@@ -39,16 +41,6 @@ In the same order as the languages appear in the app’s interface, here are the
 - **Ukrainian (uk)** : Kateryna Domina
 
 We couldn’t have done it without you — thank you all! ❤️
-
-
-## Features
-
-- Parse Wikipedia XML dumps and extract article titles and cleaned text
-- Generate graph representations of Wikipedia's link structure
-- Resolve redirects to maximize valid links in the final graph
-- Support for 11 languages
-- Extensible language support through configuration
-- User-friendly GUI for non-technical users
 
 ## Installation
 
