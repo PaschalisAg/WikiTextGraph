@@ -105,7 +105,7 @@ def gui_prompt_for_inputs():
     step2_label = Label(main_frame, text="Step 2: Select Language", font=("Arial", 12, "bold"), bg=system_bg, fg=highlight_color, anchor="w")
     step2_label.grid(row=3, column=0, sticky="w", pady=(10, 5))
 
-    available_languages = ["en", "es", "el", "pl", "it", "nl", "eu", "hi", "de", "vi"]
+    available_languages = sorted(["en", "es", "el", "pl", "it", "nl", "eu", "hi", "de", "vi", "uk"])
     selected_language.set(available_languages[0])
 
     dropdown = OptionMenu(main_frame, selected_language, *available_languages)

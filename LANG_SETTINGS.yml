@@ -212,19 +212,27 @@ vi:
     - "\\(định hướng\\)" # disambiguation pages
   redirect_keywords: ["#đổi", "#redirect"]
 
-# # Ukranian
-# ua:
-#   section_patt: "(==\\s*(||||||||)\\s*==)"
-#   filter_out_patterns:
-#     - "^Wikipedia:"
-#     - "^Вікіпедія:" # Wikipedia:
-#     - "^MediaWiki:"
-#     - "^Файл:" # File:
-#     - "^Категорія:" # Category:
-#     - "^Довідка:" # Reference:
-#     - "^Шаблон:" # Template
-#     - "^Портал:" # Portal:
-#     - "^Допомога:" # Help:
-#     - "^Модуль:"
-#     - "\\(định hướng\\)" # disambiguation pages
-#   redirect_keywords: ["#redirect", "#перенаправлення"]
+# Ukranian
+uk:
+  section_patt: "(==\\s*(Посилання|Див. також|Примітки|Виноски|Галерея|Джерела|Переклади українською|Екранізації|Література|Публікації)\\s*==)"
+  filter_out_patterns:
+    - "^Wikipedia:"
+    - "^Вікіпедія:" # Wikipedia:
+    - "^Вікіпедії:" # Wikipedia (alternative writing)
+    - "^Вікіпроект:" # Wikiproject:
+    - "^Вікіпроєкт:" # Wikiproject: (alternative writing)
+    - "^MediaWiki:"
+    - "^Файл:" # File:
+    - "^Категорія:" # Category:
+    - "^Категрія:" # Category:
+    - "^Довідка:" # Reference:
+    - "^Шаблон:" # Template
+    - "^Портал:" # Portal:
+    - "^Portal:"
+    - "^Допомога:" # Help:
+    - "^Модуль:" # Module:
+    - "^Таблиця:" # Table:
+    - "^Список" # List of
+    - "^Перенаправлення:" # Redirection
+    - "\\(значення\\)" # disambiguation pages
+  redirect_keywords: ["#redirect", "#перенаправлення", "# "]
