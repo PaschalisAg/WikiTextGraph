@@ -56,22 +56,29 @@ def extract_wiki_main_text(wiki_text: str, section_patt: Pattern) -> str:
     """
     Cleans and extracts the main body text from raw Wikipedia markup.
 
-    This function processes raw wikitext by:
-    - Removing templates (e.g., {{Infobox}}, {{Citation needed}})
-    - Removing <ref>...</ref> tags
-    - Removing HTML comments (<!-- ... -->)
-    - Trimming any introductory content before the first bolded line (typically the article's subject)
-    - Cutting off at typical non-main sections (e.g., "References", "See also", etc.)
-    - Cleaning up excess whitespace and non-breaking space HTML entities.
+    This function processes raw wikitext in four steps:
+    1. Splits the article into an intro block (everything before the first ``==`` section
+       heading) and the remaining body. This prevents template removal from creating
+       orphaned bold-text fragments in later sections that would otherwise be mistaken
+       for the article's opening line.
+    2. Cleans the intro block by removing templates (e.g., ``{{Infobox}}``),
+       ``<ref>...</ref>`` tags, and HTML comments (``<!-- ... -->``).
+    3. Optionally trims any leading junk in the intro by seeking the first bolded phrase
+       (``'''...'''``), but only if that match falls within the first 30% of the intro
+       text. This preserves articles whose introductions do not open with a bolded title.
+    4. Re-joins the cleaned intro with the remaining body, then cuts the combined text
+       at the first non-main section matched by ``section_patt`` (e.g., "References",
+       "See also"). Finally, cleans up ``& nbsp;`` entities and excess whitespace.
 
     Args:
         wiki_text (str): The full Wikipedia article source text in wikitext format.
         section_patt (Pattern): A compiled regular expression used to identify the start
-            of non-main sections (such as "== References ==") to trim off extraneous content.
+            of non-main sections (such as ``== References ==``) to trim off extraneous
+            content.
 
     Returns:
         str: A cleaned string containing the main article content, without templates,
-        references, comments, or trailing sections.
+        references, comments, or trailing non-main sections.
 
     Example:
         >>> import re
@@ -79,17 +86,22 @@ def extract_wiki_main_text(wiki_text: str, section_patt: Pattern) -> str:
         >>> from my_module import extract_wiki_main_text
         >>> wiki_markup = '''
         {{Infobox person}}
-        '''Barack Obama''' was the 44th president of the United States.
+        \'\'\'Barack Obama\'\'\' was the 44th president of the United States.
         <ref>Some citation</ref>
         == References ==
         <ref>Another citation</ref>
         '''
-        >>> section_patt = re.compile(r'==\s*(References|See also|External links)\s*==', re.IGNORECASE)
+        >>> section_patt = re.compile(r'==\\s*(References|See also|External links)\\s*==', re.IGNORECASE)
         >>> cleaned = extract_wiki_main_text(wiki_markup, section_patt)
         >>> print(cleaned)
-        "'''Barack Obama''' was the 44th president of the United States."
+        "\'\'\'Barack Obama\'\'\' was the 44th president of the United States."
 
     Notes:
+        - Template removal is applied only to the intro block, not to the full article,
+          so that bold-text fragments inside section bodies do not affect intro detection.
+        - The 30% threshold for bold-text trimming is a heuristic. Articles whose first
+          bold phrase appears later than that (e.g., long preambles without a bolded
+          subject) will have their intro preserved in full.
         - Assumes the `remove_templates` function is available and that the following
           global regex patterns exist in scope:
             - `refs_patt`: pattern for <ref> tags
@@ -97,33 +109,50 @@ def extract_wiki_main_text(wiki_text: str, section_patt: Pattern) -> str:
             - `beginning_of_main_text_patt`: pattern to find the main bolded subject line.
         - The regex patterns must be compiled prior to calling this function.
     """
-    parsed = wtp.parse(wiki_text)
-    cleaned_text = wiki_text
-
-    # remove templates
-    cleaned_text = remove_templates(parsed, cleaned_text)
-
-    # remove <ref> tags
-    cleaned_text = re.sub(refs_patt, '', cleaned_text)
-
-    # remove HTML comments
-    cleaned_text = re.sub(comments_patt, '', cleaned_text)
-
-    # trim text before the main bolded section
-    beginning_of_main_text = beginning_of_main_text_patt.search(cleaned_text)
+    # Step 1: Split article into intro (before first ==) and rest
+    # This avoids detecting orphaned bold text from removed templates
+    first_section_match = re.search(r'^==', wiki_text, flags=re.MULTILINE)
+    
+    if first_section_match:
+        intro_text = wiki_text[:first_section_match.start()]
+        rest_text = wiki_text[first_section_match.start():]
+    else:
+        # No sections found, entire article is intro
+        intro_text = wiki_text
+        rest_text = ""
+    
+    # Step 2: Clean the intro section
+    parsed = wtp.parse(intro_text)
+    cleaned_intro = intro_text
+    
+    # Remove templates (before other operations to avoid creating orphaned bold text)
+    cleaned_intro = remove_templates(parsed, cleaned_intro)
+    
+    # Remove <ref> tags
+    cleaned_intro = re.sub(refs_patt, '', cleaned_intro)
+    
+    # Remove HTML comments
+    cleaned_intro = re.sub(comments_patt, '', cleaned_intro)
+    
+    # Step 3: Use bold-text detection only if intro has leading junk
+    # (e.g., leftover metadata)
+    beginning_of_main_text = beginning_of_main_text_patt.search(cleaned_intro)
     if beginning_of_main_text:
-        begin_index = beginning_of_main_text.start()
-        cleaned_text = cleaned_text[begin_index:]
-
-    # remove text after sections usually at the end (References, See also, etc.)
-    end_main_text = section_patt.search(cleaned_text)
+        # Only trim if the match is reasonably early (not the bulk of content)
+        match_start = beginning_of_main_text.start()
+        if match_start < len(cleaned_intro) * 0.3:  # Less than 30% into the text
+            cleaned_intro = cleaned_intro[match_start:]
+    
+    # Step 4: Check if we need to cut off trailing non-main sections
+    combined_text = cleaned_intro + rest_text
+    end_main_text = section_patt.search(combined_text)
     if end_main_text:
         end_index = end_main_text.start()
-        cleaned_text = cleaned_text[:end_index]
+        combined_text = combined_text[:end_index]
     
-    cleaned_text = cleaned_text.replace('& nbsp;', '').replace('.  ', '. ').replace(',  ', ', ')
+    combined_text = combined_text.replace('& nbsp;', '').replace('.  ', '. ').replace(',  ', ', ')
     
-    return cleaned_text.strip()
+    return combined_text.strip()
 
 
 def filter_non_content_pages(df: pd.DataFrame, filter_out_patterns: List[str], redirect_keywords: List[str]) -> pd.DataFrame:
