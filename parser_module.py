@@ -1,5 +1,6 @@
 import xml.sax
 import gc
+import codecs
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -133,6 +134,89 @@ def get_language_settings(language_code, yaml_file="LANG_SETTINGS.yml"):
     return language_settings.get(language_code, language_settings["en"])
 
 
+def _find_next_bz2_header(data, raw_file, read_size):
+    """
+    Scan forward through *data* (and then the raw file) to locate the next
+    bz2 stream header (magic bytes ``BZh`` followed by a block-size digit 1-9).
+
+    Returns the data starting at the header, or an empty bytes object if
+    no further header is found.
+    """
+    while True:
+        pos = 1  # skip position 0 to avoid re-matching the broken header
+        while True:
+            idx = data.find(b'BZh', pos)
+            if idx < 0:
+                break
+            if idx + 3 < len(data) and 49 <= data[idx + 3] <= 57:  # '1'..'9'
+                return data[idx:]
+            pos = idx + 1
+        data = raw_file.read(read_size)
+        if not data:
+            return b''
+
+
+def _iter_multistream_bz2(filepath, read_size=65536):
+    """
+    Decompress a multistream bz2 file, yielding chunks of raw bytes.
+
+    Wikipedia's ``-pages-articles-multistream.xml.bz2`` dumps consist of many
+    independent bz2 streams concatenated together.  Python's ``bz2.BZ2File``
+    relies on the platform ``libbz2`` to handle stream boundaries, and some
+    builds (notably the one shipped with macOS) choke at those boundaries.
+
+    This function drives ``bz2.BZ2Decompressor`` directly, creating a fresh
+    decompressor for each stream.  If a stream is corrupted it scans forward
+    for the next valid ``BZh`` header and resumes, so a single bad block does
+    not abort the entire dump.
+    """
+    with open(filepath, 'rb') as raw:
+        buf = b''
+
+        while True:
+            decompressor = bz2.BZ2Decompressor()
+
+            try:
+                while not decompressor.eof:
+                    if not buf:
+                        buf = raw.read(read_size)
+                        if not buf:
+                            return
+                    decompressed = decompressor.decompress(buf)
+                    buf = b''  # input fully consumed by the decompressor
+                    if decompressed:
+                        yield decompressed
+
+                # Stream finished normally; carry over unconsumed bytes
+                buf = decompressor.unused_data
+
+                # If nothing is left, try reading more from the file
+                if not buf:
+                    buf = raw.read(read_size)
+                    if not buf:
+                        return
+
+            except OSError:
+                # Current stream is corrupted — try to recover
+                remaining = decompressor.unused_data + buf
+                buf = _find_next_bz2_header(remaining, raw, read_size)
+                if not buf:
+                    return
+
+
+def _feed_parser_from_chunks(chunk_iter, parser):
+    """
+    Feed decompressed byte chunks into a SAX parser with incremental UTF-8
+    decoding.
+    """
+    decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
+    for chunk in chunk_iter:
+        parser.feed(decoder.decode(chunk))
+    tail = decoder.decode(b"", final=True)
+    if tail:
+        parser.feed(tail)
+
+
 def parse_wikidump(dump_filepath, language_code="en", base_dir=None, generate_graph_flag=False, use_string_labels=False):
     """
     Parses a Wikipedia XML dump, extracts relevant content, and optionally generates a graph.
@@ -171,9 +255,7 @@ def parse_wikidump(dump_filepath, language_code="en", base_dir=None, generate_gr
 
     # process the Wikipedia XML dump
     try:
-        with bz2.open(dump_filepath, "rt", encoding="utf-8") as file:
-            for line in file:
-                parser.feed(line)
+        _feed_parser_from_chunks(_iter_multistream_bz2(dump_filepath), parser)
     except xml.sax.SAXException:
         pass
     finally:
