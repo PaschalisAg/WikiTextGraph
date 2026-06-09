@@ -19,10 +19,12 @@ def generate_graph(
     graph_output_dir = Path(graph_output_dir)
     graph_output_dir.mkdir(parents=True, exist_ok=True)
 
+    # regex patterns needed for filtering out unwanted pages and identifying redirects
     filter_out_patterns = settings["filter_out_patterns"]
     redirect_keywords = [kw.lower() for kw in settings["redirect_keywords"]]
     filter_re = re.compile("|".join(filter_out_patterns), flags=re.IGNORECASE)
 
+    # regex pattern to extract wikilinks of all types
     wiki_link_regex = re.compile(
         r"\[\["
         r"([^\|\[\]#]+)"
@@ -40,43 +42,51 @@ def generate_graph(
         df = df[~df["title"].apply(lambda s: bool(
             isinstance(s, str) and filter_re.search(s)))]
 
+        # detect the lines that are redirects add a binary flag
         df["Redirect_Flag"] = df["text"].str.lower().str.startswith(
             tuple(redirect_keywords)).astype(int)
+        # extract wikilinks from the text and 
+        # explode the dataframe so that each row corresponds to a single link
         df["wikilinks"] = df["text"].apply(
             lambda x: extract_wikilinks(wiki_link_regex, x))
 
+        # create a new dataframe where each row corresponds to a single link, 
+        # with columns for source and target
         graph_data = (
             df.explode("wikilinks")
               .rename(columns={"title": "Source", "wikilinks": "Target"})
               .drop(columns=["text"], errors="ignore")
         )
-
+        # fix dubious links and normalize target titles
         graph_data["Source"] = graph_data["Source"].apply(fix_dubious_links)
         graph_data["Target"] = graph_data["Target"].apply(fix_dubious_links)
+        # normalization is happening here because Wikipedia page titles are case-sensitive
         graph_data["Target"] = graph_data["Target"].apply(
             lambda word: word[0].upper(
             ) + word[1:] if isinstance(word, str) and word else word
         )
-
+        # drop NaN values in the Target column
+        # very few instance but they can exist
         graph_data = graph_data.dropna(subset=["Target"])
 
-        # Normalize section links to self-links
+        # normalize section links to self-links
         bool_mask = graph_data["Target"].str.startswith("#")
         graph_data.loc[bool_mask,
                        "Target"] = graph_data.loc[bool_mask, "Source"]
 
-        # Remove links to other language wikis
+        # remove links to other language wikis
         lang_link_pattern = r"^[a-zA-Z]{2,3}:"
         graph_data = graph_data[~graph_data["Target"].str.match(
             lang_link_pattern)]
 
-        # Remove self-loops
+        # remove self-loops
         graph_data = graph_data[graph_data["Source"] != graph_data["Target"]]
 
         all_graph_data.append(graph_data)
 
     final_graph_data = pd.concat(all_graph_data, ignore_index=True)
-
+    # resolve redirects in the target column and 
+    # remove any resulting self-loops or duplicates
     redirect_mapping_path = graph_output_dir / "redirects_rev_mapping.pkl.gzip"
     if not redirect_mapping_path.exists():
         reverse_redirect_dict = dict(zip(
@@ -126,10 +136,14 @@ def generate_graph(
     mapping_df_path = graph_output_dir / \
         f"{language_code}_id_node_mapping.parquet"
     mapping_df.to_parquet(
-        mapping_df_path, engine="fastparquet", compression="gzip")
+        mapping_df_path, engine="pyarrow", 
+        compression="gzip", 
+        compression_level=5)
 
     graph_output_path = graph_output_dir / \
         f"{language_code}_wiki_graph.parquet"
     final_graph_data.to_parquet(
-        graph_output_path, engine="fastparquet", compression="gzip")
+        graph_output_path, engine="pyarrow", 
+        compression="gzip", 
+        compression_level=5)
     print(f"Graph data saved to {graph_output_path}")
