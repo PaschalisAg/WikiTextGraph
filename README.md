@@ -5,7 +5,7 @@
 
 `WikiTextGraph` is a Python package for parsing Wikipedia dumps, cleaning article texts, and generating graph representations of Wikipedia's link structure. 
 
-WikiTextGraph currently supports **11** languages but is constantly updated. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/LANG_SETTINGS.yml).
+WikiTextGraph currently supports **12** languages but is constantly updated. The language-specific settings are stored in [`LANG_SETTINGS.yml`](https://github.com/PaschalisAg/WikiTextGraph/blob/main/LANG_SETTINGS.yml).
 
 If you want to add a new language and enter the Pantheon of Acknowledgments below, go to [`Adding a new language`](https://github.com/PaschalisAg/WikiTextGraph?tab=readme-ov-file#adding-a-new-language) or email us.
 
@@ -24,6 +24,7 @@ If you want to add a new language and enter the Pantheon of Acknowledgments belo
 | 🇮🇹 | Italian       | it |
 | 🇻🇳 | Vietnamese    | vi |
 | 🇺🇦 | Ukrainian     | uk |
+|    | Catalan       | ca |
 
 
 ## Acknowledgements
@@ -32,7 +33,7 @@ A huge thank-you to all the native (L1) speakers who generously shared their tim
 
 In the same order as the languages appear in the app’s interface, here are the amazing people who helped us out:
 
-- **Spanish (es)** & **Basque (eu)**󠁥 : Amaia Elizaran Mendarte and Ane Escobar Fernández  
+- **Spanish (es)** & **Basque (eu)**󠁥: Amaia Elizaran Mendarte and Ane Escobar Fernández  
 - **Polish (pl)**: Adam Olejniczak and Zuzanna Lawera  
 - **Italian (it)**: Valerio Di Lisio  
 - **Hindi (hi)**: Anish Rao  
