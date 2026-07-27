@@ -52,6 +52,32 @@ es:
     - "^Modulo:"
   redirect_keywords: ["#redirección", "#redireccion", "#redirect"]
 
+  # Catalan
+ca:
+  section_patt: "(==\\s*(Traduccions al català|Vegeu també|Referències|Notes|Notes i Referències|Enllaços externs|Publicacions|Bibliografia|Bibliografia addicional|Imatges|Galeria d'imatges)\\s*==)"
+  filter_out_patterns:
+    - "^Wiktionary:"
+    - "^Categoria:"
+    - "^File:"
+    - "^Fitxer:" # File:
+    - "^Image:" # Imatge ????
+    - "^MediaWiki:"
+    - "^Plantilla:" # Template
+    - "^Viquipèdia:" # Wikipedia:
+    - "^Annex:" # Annex:
+    - "\\(desambiguació\\)" # disambiguation
+    - "\\(desambiguacio\\)" # disambiguation
+    - "\\(des\\)" # disambiguation
+    - "^Portal:" # Portal
+    - "^Ajuda:" # Help:
+    - "^Viquiprojecte:" # Wikiproject
+    - "^VP:" # Wikiproject
+    - "^Usuari:" # User
+    - "^Mòdul:" # Module
+    - "^Modul:"
+    - "^Tema:" # Topic
+  redirect_keywords: ["#redirecció", "#redireccio", "#redirect"]
+
 # Greek
 el:
   section_patt: "(==\\s*(Δείτε επίσης|Δειτε επισης|Παραπομπές|Παραπομπες|Σημειώσεις|Σημειωσεις|Εξωτερικοί σύνδεσμοι|Εξωτερικοι συνδεσμοι|Προτεινόμενη βιβλιογραφία|Προτεινομενη βιβλιογραφια|Βιβλιογραφία|Βιβλιογραφια|Περαιτέρω ανάγνωση|Περαιτερω αναγνωση)\\s*==)"
@@ -236,3 +262,4 @@ uk:
     - "^Перенаправлення:" # Redirection
     - "\\(значення\\)" # disambiguation pages
   redirect_keywords: ["#redirect", "#перенаправлення", "# "]
+
