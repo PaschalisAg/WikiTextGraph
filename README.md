@@ -33,7 +33,7 @@ A huge thank-you to all the native (L1) speakers who generously shared their tim
 
 In the same order as the languages appear in the app’s interface, here are the amazing people who helped us out:
 
-- **Spanish (es)** & **Basque (eu)**󠁥: Amaia Elizaran Mendarte and Ane Escobar Fernández  
+- **Spanish (es)** & **Basque (eu)**: Amaia Elizaran Mendarte and Ane Escobar Fernández  
 - **Polish (pl)**: Adam Olejniczak and Zuzanna Lawera  
 - **Italian (it)**: Valerio Di Lisio  
 - **Hindi (hi)**: Anish Rao  
