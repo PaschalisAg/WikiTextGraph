@@ -11,22 +11,22 @@ If you want to add a new language and enter the Pantheon of Acknowledgments belo
 
 ## Supported Languages
 
-| Flag | Language     | Code |
-|:----:|--------------|:----:|
-| 🇬🇧 | English       | en |
-| 🇪🇸 | Spanish       | es |
-| 🇬🇷 | Greek         | el |
-| 🇵🇱 | Polish        | pl |
-| 🇩🇪 | German        | de |
-|    | Basque        | eu |
-| 🇳🇱 | Dutch         | nl |
-| 🇮🇳 | Hindi         | hi |
-| 🇮🇹 | Italian       | it |
-| 🇻🇳 | Vietnamese    | vi |
-| 🇺🇦 | Ukrainian     | uk |
-|    | Catalan       | ca |
-|    | Serbian       | sr |
-|    | Arabic       | ar |
+| Language      | Code |
+|-------------- |:----:|
+| English       | en |
+| Spanish       | es |
+| Greek         | el |
+| Polish        | pl |
+| German        | de |
+| Basque        | eu |
+| Dutch         | nl |
+| Hindi         | hi |
+| Italian       | it |
+| Vietnamese    | vi |
+| Ukrainian     | uk |
+| Catalan       | ca |
+| Serbian       | sr |
+| Arabic        | ar |
 
 
 ## Acknowledgements
