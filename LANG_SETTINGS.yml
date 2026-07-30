@@ -261,5 +261,57 @@ uk:
     - "^Список" # List of
     - "^Перенаправлення:" # Redirection
     - "\\(значення\\)" # disambiguation pages
-  redirect_keywords: ["#redirect", "#перенаправлення", "# "]
+  redirect_keywords: ["#redirect", "#перенаправлення"]
 
+# Serbian
+sr:
+  section_patt: "(==\\s*(Литература|Види још|Референце|Напомене|Галерија|Спољашње везе|Додатна литература)\\s*==)"
+  filter_out_patterns:
+    - "^Wiktionary:"
+    - "^Category:"
+    - "^Категорија:"
+    - "^Нацрт:" # Draft
+    - "^Датотека:" # File
+    - "^MediaWiki:"
+    - "^Медијавики:" # MediaWiki
+    - "^Модул:"
+    - "^Шаблон:" # Template
+    - "^Википедија:" # Wikipedia
+    - "^Wikipedia:"
+    - "\\(вишезначна одредница\\)" # disambiguation
+    - "^Портал:"
+    - "^Помоћ:" # Help
+    - "^Списак" # List of
+  redirect_keywords: ["#redirect", "#преусмери", "#преусмјери", "#preusmeri"]
+
+# Arabic
+ar:
+  section_patt: "(==\\s*(انظر أيضًا|المراجع|الملاحظات|ملاحظات|هوامش|وصلات خارجية|روابط خارجية|مراجع|المزيد من القراءة)\\s*==)"
+  filter_out_patterns:
+    - "^Wiktionary:"
+    - "^Category:"
+    - "^تصنيف:" # Category
+    - "^Draft:"
+    - "^مسودة:" # Draft
+    - "^File:"
+    - "^الملف:" # File
+    - "^:ملف" # File
+    - "^List of"
+    - "^قائمة" # list of
+    - "^MediaWiki:"
+    - "^ميدياويكي:"
+    - "^Module:"
+    - "^قالب:" # Template
+    - "^Wikipedia:"
+    - "^:ويكيبيديا" # Wikipedia
+    - "\\(disambiguation\\)"
+    - "\\(توضيح\\)" # disambiguation
+    - "^Portal:"
+    - "^بوابة:" # Portal
+    - "^Image:"
+    - "^صورة:" # Image
+    - "^:صورة" # Image
+    - "^Help:"
+    - "^مساعدة:" # Help
+    - "^:مساعدة"
+  redirect_keywords: ["#تحويل", "#redirect"]
