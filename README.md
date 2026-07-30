@@ -25,6 +25,8 @@ If you want to add a new language and enter the Pantheon of Acknowledgments belo
 | 🇻🇳 | Vietnamese    | vi |
 | 🇺🇦 | Ukrainian     | uk |
 |    | Catalan       | ca |
+|    | Serbian       | sr |
+|    | Arabic       | ar |
 
 
 ## Acknowledgements
@@ -40,6 +42,9 @@ In the same order as the languages appear in the app’s interface, here are the
 - **German (de)**: Balthasar Braunewell  
 - **Vietnamese (vi)**: Phuong Thu Le
 - **Ukrainian (uk)** : Kateryna Domina
+- **Serbian (sr)** : Đorđe Dangić
+- **Catalan (ca)** : Jaume Navarro Vives
+- **Arabic (ar)** :  Ebtisam Tarek Mohammed Saeed
 
 We couldn’t have done it without you — thank you all! ❤️
 
