@@ -107,7 +107,7 @@ def gui_prompt_for_inputs():
 
     available_languages = sorted(["en", "es", "el", "pl", "it", "nl", 
                                   "eu", "hi", "de", "vi", "uk", "ca",
-                                  "sr", "ar"])
+                                  "sr", "ar", "fr"])
     selected_language.set(available_languages[0])
 
     dropdown = OptionMenu(main_frame, selected_language, *available_languages)

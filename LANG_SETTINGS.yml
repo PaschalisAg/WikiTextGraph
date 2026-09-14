@@ -315,3 +315,29 @@ ar:
     - "^مساعدة:" # Help
     - "^:مساعدة"
   redirect_keywords: ["#تحويل", "#redirect"]
+
+# French
+fr:
+  section_patt: "(==\\s*(Notes et références|Références|Notes|Voir aussi|Articles connexes|Liens externes|Annexes|Bibliographie|)\\s*==)"
+  filter_out_patterns:
+    - "^Catégorie:" # Category
+    - "^Draft:"
+    - "^Fichier:" # File
+    - "^Liste" # list of
+    - "^Liste d'" # list of
+    - "^Liste de" # list of
+    - "^Liste du" # list of
+    - "^Liste des" # list of
+    - "^MediaWiki:"
+    - "^Module:"
+    - "^Sujet:" # Topic
+    - "^Modèle:" # Template
+    - "^Module:" # Module
+    - "^Wikipédia:" # Wikipedia
+    - "^Projet:" # Project
+    - "\\(homonymie\\)"
+    - "\\(disambiguation\\)"
+    - "^Portal:"
+    - "^Portail:" # Portal
+    - "^Aide:" # Help
+  redirect_keywords: ["#redirect", "#redirection"]
