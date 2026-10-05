@@ -27,6 +27,7 @@ If you want to add a new language and enter the Pantheon of Acknowledgments belo
 | Catalan       | ca |
 | Serbian       | sr |
 | Arabic        | ar |
+| French        | fr |
 
 
 ## Acknowledgements
@@ -156,12 +157,6 @@ Under this license, you are free to:
 - **Modify** and distribute the software.
 - **Integrate** it into your own projects.
 - **Commercialize** derived works.
-
-However, the following conditions apply:
-
-- **Attribution**: You must provide appropriate credit to the original authors, include the license notice, and indicate if changes were made.
-- **No Warranty**: The software is provided "as is," without any express or implied warranties.
-- **Patent Grant**: If you contribute to the project, you grant a license to use any of your patents related to the contributed code.
 
 For full details, see the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
